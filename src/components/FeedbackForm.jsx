@@ -23,12 +23,12 @@ function FeedbackForm({ onFeedbackSubmit }) {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">
+    <div className="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6 sm:p-8">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center sm:text-left">
         Give Us Your Feedback
       </h2>
       <form onSubmit={handleSubmit}>
-        <div className="flex space-x-2 mb-4">
+        <div className="flex space-x-2 mb-4 justify-center sm:justify-start">
           {/* Rating Buttons */}
           {[1, 2, 3, 4, 5].map((num) => (
             <button
@@ -38,7 +38,7 @@ function FeedbackForm({ onFeedbackSubmit }) {
                 rating === num
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-gray-800"
-              } font-medium py-2 px-4 rounded transition`}
+              } font-medium py-2 px-4 rounded transition hover:bg-blue-500 hover:text-white`}
               onClick={() => handleRatingClick(num)}
             >
               {num} ⭐
@@ -48,12 +48,12 @@ function FeedbackForm({ onFeedbackSubmit }) {
         <textarea
           placeholder="Leave a comment (optional)"
           onChange={(e) => setComment(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-black"
+          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-black text-sm sm:text-base"
         ></textarea>
         <button
           type="submit"
           value={comment}
-          className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg w-full hover:bg-blue-600 transition"
+          className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg w-full hover:bg-blue-600 transition text-sm sm:text-base"
         >
           Submit Feedback
         </button>
