@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import FeedbackForm from "./components/FeedbackForm";
+import FeedbackList from "./components/FeedbackList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [feedbacks, setFeedbacks] = useState(() => {
+    const savedFeedbacks = localStorage.getItem("feedbacks");
+    return savedFeedbacks ? JSON.parse(savedFeedbacks) : [];
+  });
 
+  useEffect(() => {
+    localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+  }, [feedbacks]);
+
+  const handleFeedbackSubmit = (feedback) => {
+    setFeedbacks([...feedbacks, feedback]);
+  };
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="min-h-screen bg-gray-100 p-6">
+      <FeedbackForm onFeedbackSubmit={handleFeedbackSubmit} />
+      <FeedbackList feedbacks={feedbacks} />
+    </div>
+  );
 }
 
-export default App
+export default App;
